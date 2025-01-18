@@ -54,3 +54,4 @@ When you're done working with the project, stop the containers with:
    ```bash
    docker-compose down
    ```
+   This is a test

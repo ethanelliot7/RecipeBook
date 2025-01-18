@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1','0.0.0.0']
 
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +41,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'corsheaders',
+]
+
+TENANT_APPS=(
+    'api.users',
+)
+
+
+INSTALLED_APPS = list(SHARED_APPS) + [
+    app for app in TENANT_APPS if app not in SHARED_APPS
 ]
 
 MIDDLEWARE = [
@@ -165,3 +174,5 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7)
 }
+
+AUTH_USER_MODEL = 'users.Profile'

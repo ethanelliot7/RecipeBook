@@ -1,14 +1,14 @@
-from django.contrib.auth.models import User
+from api.users.models import Profile
 from rest_framework import serializers
 
 class AuthSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Profile
         fields = ['id', 'username', 'email', 'password']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
+        user = Profile.objects.create_user(**validated_data)
         return user
 
 

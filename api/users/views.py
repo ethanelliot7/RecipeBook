@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from api.users.models import Profile
 from rest_framework import status
 from api.users.serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated,AllowAny
@@ -7,15 +7,15 @@ from rest_framework.response import Response
 from django.http import Http404
 
 class UserView(APIView):
-    queryset = User.objects.all()
+    queryset = Profile.objects.all()
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
 
 
     def get_user(self,pk):
         try:
-            return User.objects.get(pk=pk)
-        except User.DoesNotExist:
+            return Profile.objects.get(pk=pk)
+        except Profile.DoesNotExist:
             raise Http404
 
     def get(self,request,pk):
